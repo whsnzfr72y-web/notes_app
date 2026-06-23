@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: notes-app
+    runtime: python
+    buildCommand: pip install -r requirements.txt --target=.deps
+    startCommand: PYTHONPATH=.deps python3 main.py
