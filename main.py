@@ -1,5 +1,7 @@
 import flet as ft
 import json
+import threading
+import urllib.request
 import uuid
 from datetime import datetime
 import os
@@ -333,6 +335,20 @@ def main(page: ft.Page):
     if notes:
         load_note(notes[0])
 
+
+def keep_alive():
+    url = os.getenv("RENDER_URL", "https://notes-app44.onrender.com")
+    def ping():
+        while True:
+            threading.Event().wait(600)
+            try:
+                urllib.request.urlopen(url, timeout=10)
+            except Exception:
+                pass
+    t = threading.Thread(target=ping, daemon=True)
+    t.start()
+
+keep_alive()
 
 ft.app(
     target=main,
