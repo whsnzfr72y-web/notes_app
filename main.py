@@ -117,12 +117,6 @@ def main(page: ft.Page):
             tags_f.value = ""; tags_f.update(); tags_row.update()
     tags_f.on_submit = add_tag
 
-    def pick_color(e):
-        chosen_color[0] = e.control.data
-        for b in color_btns.controls:
-            b.opacity = 1.0 if b.data == chosen_color[0] else 0.3
-        color_btns.update()
-
     def save_note(e):
         if not title_f.value.strip():
             page.snack_bar = ft.SnackBar(ft.Text("Введите название"), bgcolor=ft.Colors.ERROR)
@@ -297,4 +291,4 @@ def keep_alive():
 
 keep_alive()
 
-ft.app(target=main, host="0.0.0.0", port=int(os.getenv("PORT", 8080)), view=ft.AppView.WEB_BROWSER)
+ft.app(target=main, host="127.0.0.1", port=8765, view=ft.AppView.WEB_BROWSER)
